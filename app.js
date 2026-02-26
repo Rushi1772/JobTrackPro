@@ -50,7 +50,12 @@ app.use((err, req, res, next) => {
 
 (async () => {
   try {
-    await initDB(); 
+    console.log("🔌 Attempting DB connection to:", process.env.DB_HOST, "port:", process.env.DB_PORT);
+    await pool.query("SELECT 1");
+    console.log("✅ DB connected");
+
+    await initDB();
+
     app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
   } catch (err) {
     console.error("❌ Server not started (DB failed):", err.message);
