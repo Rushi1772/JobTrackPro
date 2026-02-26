@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-
+  ssl: { rejectUnauthorized: false }
   // If Aiven requires SSL and you get SSL errors, uncomment this:
   // ssl: { rejectUnauthorized: false },
 });

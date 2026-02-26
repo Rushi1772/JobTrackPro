@@ -1,6 +1,11 @@
 // app.js
 require("dotenv").config();
-
+const required = ["DB_HOST", "DB_USER", "DB_PASS", "DB_NAME", "JWT_SECRET"];
+const missing = required.filter((k) => !process.env[k]);
+if (missing.length) {
+  console.error("❌ Missing environment variables:", missing.join(", "));
+  process.exit(1);
+}
 const express = require("express");
 const cors = require("cors");
 
@@ -45,7 +50,7 @@ app.use((err, req, res, next) => {
 
 (async () => {
   try {
-    await initDB(); // ✅ if DB fails, Render will show the real error in logs
+    await initDB(); 
     app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
   } catch (err) {
     console.error("❌ Server not started (DB failed):", err.message);
