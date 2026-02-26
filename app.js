@@ -13,7 +13,7 @@ const { pool, initDB } = require("./config/database");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// ✅ Required env vars check (helps Render debugging)
+// ✅ Required env vars check 
 const required = ["DB_HOST", "DB_USER", "DB_PASS", "DB_NAME", "JWT_SECRET"];
 const missing = required.filter((k) => !process.env[k]);
 if (missing.length) {
