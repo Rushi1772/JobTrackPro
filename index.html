@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobTrackPro Dashboard</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .application {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    button {
+      background: #4f46e5;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #4338ca;
+    }
+
+    .events {
+      margin-top: 10px;
+      padding-left: 15px;
+    }
+
+    .event {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    select, input {
+      padding: 6px;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>📋 Job Applications</h1>
+
+<div id="applications"></div>
+
+<script>
+const API = "http://localhost:4000";
+
+async function loadApplications() {
+  const res = await fetch(`${API}/applications`);
+  const apps = await res.json();
+  const container = document.getElementById("applications");
+  container.innerHTML = "";
+
+  apps.forEach(app => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="application">
+        <strong>${app.company_name}</strong>
+        <button onclick="loadEvents(${app.id}, this)">View Events</button>
+      </div>
+      <div class="events"></div>
+
+      <div style="margin-top:10px;">
+        <select id="type-${app.id}">
+          <option>Interview</option>
+          <option>Follow-Up</option>
+          <option>Offer / Rejection</option>
+        </select>
+
+        <input type="date" id="date-${app.id}" />
+        <button onclick="addEvent(${app.id})">➕ Add Event</button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+async function loadEvents(appId, btn) {
+  const eventsDiv = btn.parentElement.nextElementSibling;
+  const res = await fetch(`${API}/events/${appId}`);
+  const events = await res.json();
+
+  eventsDiv.innerHTML = "";
+  events.forEach(e => {
+    const div = document.createElement("div");
+    div.className = "event";
+    div.textContent = `📌 ${e.type} — ${e.date}`;
+    eventsDiv.appendChild(div);
+  });
+}
+
+async function addEvent(appId) {
+  const type = document.getElementById(`type-${appId}`).value;
+  const date = document.getElementById(`date-${appId}`).value;
+
+  await fetch(`${API}/events`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ application_id: appId, type, date })
+  });
+
+  alert("Event added!");
+}
+
+loadApplications();
+</script>
+
+</body>
+</html>
