@@ -5,16 +5,21 @@ const mysql = require("mysql2/promise");
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASS,     
+  password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   port: Number(process.env.DB_PORT || 3306),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  ssl: { rejectUnauthorized: false }
-  // If Aiven requires SSL and you get SSL errors, uncomment this:
-  // ssl: { rejectUnauthorized: false },
+
+  // Aiven usually needs SSL
+  ssl: { rejectUnauthorized: false },
 });
+
+// ✅ Compatibility helper (so older code using getPool() also works)
+function getPool() {
+  return pool;
+}
 
 async function initDB() {
   // USERS
@@ -33,9 +38,9 @@ async function initDB() {
     CREATE TABLE IF NOT EXISTS applications (
       id INT PRIMARY KEY AUTO_INCREMENT,
       user_id INT NOT NULL,
-      company VARCHAR(255),
-      role VARCHAR(255),
-      status VARCHAR(50),
+      company VARCHAR(255) NOT NULL,
+      role VARCHAR(255) NOT NULL,
+      status VARCHAR(50) DEFAULT 'applied',
       applied_date DATE,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )
@@ -45,9 +50,13 @@ async function initDB() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS events (
       id INT PRIMARY KEY AUTO_INCREMENT,
+      user_id INT NOT NULL,
       application_id INT NOT NULL,
-      event_type VARCHAR(255),
-      event_date DATE,
+      event_type VARCHAR(255) NOT NULL,
+      event_date DATE NOT NULL,
+      notes VARCHAR(500),
+
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
       FOREIGN KEY (application_id) REFERENCES applications(id) ON DELETE CASCADE
     )
   `);
@@ -55,4 +64,4 @@ async function initDB() {
   console.log("✅ Database tables initialized successfully");
 }
 
-module.exports = { pool, initDB };
+module.exports = { pool, getPool, initDB };
