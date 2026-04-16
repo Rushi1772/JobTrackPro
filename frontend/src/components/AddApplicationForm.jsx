@@ -3,7 +3,8 @@ import { useState } from "react";
 export default function AddApplicationForm({ onAdd }) {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
-  const [status, setStatus] = useState("Applied");
+  const [status, setStatus] = useState("applied");
+  const [appliedDate, setAppliedDate] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,10 +14,17 @@ export default function AddApplicationForm({ onAdd }) {
       return;
     }
 
-    onAdd({ company, role, status });
+    onAdd({
+      company: company.trim(),
+      role: role.trim(),
+      status,
+      applied_date: appliedDate || null
+    });
+
     setCompany("");
     setRole("");
-    setStatus("Applied");
+    setStatus("applied");
+    setAppliedDate("");
   };
 
   return (
@@ -31,6 +39,7 @@ export default function AddApplicationForm({ onAdd }) {
             placeholder="Company"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
+            required
           />
         </div>
 
@@ -41,6 +50,7 @@ export default function AddApplicationForm({ onAdd }) {
             placeholder="Role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
+            required
           />
         </div>
 
@@ -50,10 +60,20 @@ export default function AddApplicationForm({ onAdd }) {
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           >
-            <option value="Applied">Applied</option>
-            <option value="Interview">Interview</option>
-            <option value="Rejected">Rejected</option>
+            <option value="applied">Applied</option>
+            <option value="interview">Interview</option>
+            <option value="rejected">Rejected</option>
           </select>
+        </div>
+
+        <div className="form-group">
+          <input
+            className="input-field"
+            type="date"
+            placeholder="Applied Date (optional)"
+            value={appliedDate}
+            onChange={(e) => setAppliedDate(e.target.value)}
+          />
         </div>
 
         <button className="primary-button" type="submit">

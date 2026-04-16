@@ -3,21 +3,260 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JobTrackPro Dashboard</title>
-
+  <title>JobTrackPro - Job Application Tracker</title>
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f4f6f9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     h1 {
-      color: #2c3e50;
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .card {
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .status {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .status h3 {
+      margin: 0 0 10px 0;
+      color: #86efac;
+    }
+
+    .instructions {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .instructions h3 {
+      margin-top: 0;
+      color: #e0e7ff;
+    }
+
+    .instructions ol {
+      margin: 10px 0 0 20px;
+    }
+
+    .instructions li {
+      margin: 8px 0;
+    }
+
+    .code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.9em;
+    }
+
+    .button {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 JobTrackPro</h1>
+    <p class="subtitle">Professional Job Application Tracking System</p>
+
+    <div class="status">
+      <h3>✅ Project Status: Ready to Run</h3>
+      <p>Full-stack application with authentication, database integration, and modern UI</p>
+    </div>
+
+    <div class="instructions">
+      <h3>Quick Start</h3>
+      <ol>
+        <li>Install dependencies: <code class="code">npm install</code> (backend) and <code class="code">cd frontend && npm install</code></li>
+        <li>Configure database in <code class="code">.env</code> file (copy from <code class="code">.env.example</code>)</li>
+        <li>Start backend: <code class="code">npm start</code></li>
+        <li>Start frontend: <code class="code">cd frontend && npm run dev</code></li>
+        <li>Open <a href="http://localhost:5173" class="button">Frontend App</a> and <a href="http://localhost:4000" class="button">API Docs</a></li>
+      </ol>
+    </div>
+
+    <p>
+      <a href="https://github.com/your-repo/jobtrackpro" class="button">View on GitHub</a>
+      <a href="./README.md" class="button">Read Documentation</a>
+    </p>
+  </div>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobTrackPro - Job Application Tracker</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 600px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #fff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .status {
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .status h3 {
+      margin: 0 0 10px 0;
+      color: #86efac;
+    }
+
+    .instructions {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: left;
+      margin: 20px 0;
+    }
+
+    .instructions h3 {
+      margin-top: 0;
+      color: #e0e7ff;
+    }
+
+    .instructions ol {
+      margin: 10px 0 0 20px;
+    }
+
+    .instructions li {
+      margin: 8px 0;
+    }
+
+    .code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.9em;
+    }
+
+    .button {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 JobTrackPro</h1>
+    <p class="subtitle">Professional Job Application Tracking System</p>
+
+    <div class="status">
+      <h3>✅ Project Status: Ready to Run</h3>
+      <p>Full-stack application with authentication, database integration, and modern UI</p>
+    </div>
+
+    <div class="instructions">
+      <h3>Quick Start</h3>
+      <ol>
+        <li>Install dependencies: <code class="code">npm install</code> (backend) and <code class="code">cd frontend && npm install</code></li>
+        <li>Configure database in <code class="code">.env</code> file (copy from <code class="code">.env.example</code>)</li>
+        <li>Start backend: <code class="code">npm start</code></li>
+        <li>Start frontend: <code class="code">cd frontend && npm run dev</code></li>
+        <li>Open <a href="http://localhost:5173" class="button">Frontend App</a> and <a href="http://localhost:4000" class="button">API Docs</a></li>
+      </ol>
+    </div>
+
+    <p>
+      <a href="https://github.com/your-repo/jobtrackpro" class="button">View on GitHub</a>
+      <a href="./README.md" class="button">Read Documentation</a>
+    </p>
+  </div>
+</body>
+</html>
       background: #fff;
       border-radius: 10px;
       padding: 16px;

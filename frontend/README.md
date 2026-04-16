@@ -1,16 +1,50 @@
-# React + Vite
+# JobTrackPro Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React frontend for the JobTrackPro job application tracking system.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **User Authentication**: Login and registration forms
+- **Application Management**: Add, view, and delete job applications
+- **Real-time Updates**: Instant UI updates with API integration
+- **Responsive Design**: Mobile-friendly interface with glassmorphism styling
+- **Modern React**: Built with React 19 and hooks
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** with modern hooks
+- **Vite** for fast development and building
+- **CSS** with glassmorphism design
+- **Fetch API** for HTTP requests
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+### Environment
+
+The frontend connects to the backend API at `http://localhost:4000` by default. Update the `API_BASE` in `src/api.js` if your backend runs on a different port.
+
+## Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/     # React components
+│   │   ├── Navbar.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── ApplicationList.jsx
+│   │   ├── AddApplicationForm.jsx
+│   │   └── LoginForm.jsx
+│   ├── api.js          # API service functions
+│   ├── App.jsx         # Main React app
+│   ├── main.jsx        # App entry point
+│   └── index.css       # Global styles
+├── public/             # Static assets
+└── package.json
+```

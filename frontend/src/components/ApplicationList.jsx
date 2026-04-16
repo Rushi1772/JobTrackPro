@@ -1,9 +1,15 @@
-export default function ApplicationList({ applications }) {
+export default function ApplicationList({ applications, onDelete }) {
   const getBadgeClass = (status) => {
     const value = status.toLowerCase();
     if (value === "interview") return "badge badge-interview";
     if (value === "rejected") return "badge badge-rejected";
     return "badge badge-applied";
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this application?")) {
+      onDelete(id);
+    }
   };
 
   return (
@@ -23,6 +29,13 @@ export default function ApplicationList({ applications }) {
               <span className={getBadgeClass(app.status || "Applied")}>
                 {app.status || "Applied"}
               </span>
+              <button
+                onClick={() => handleDelete(app.id)}
+                className="delete-button"
+                title="Delete application"
+              >
+                ×
+              </button>
             </li>
           ))}
         </ul>
