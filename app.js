@@ -58,9 +58,14 @@ app.use("/api/users", userRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/events", eventRoutes);
 
-// ✅ Catch all handler: send back React's index.html for client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// ✅ Catch all handler: send back React's index.html for client-side routing (excluding API routes)
+app.get(/^\/(?!api).*/, (req, res) => {
+  const indexPath = path.join(__dirname, 'public', 'index.html');
+  if (require('fs').existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).send('Frontend not built. Please run: npm run build');
+  }
 });
 
 // Global error handler
